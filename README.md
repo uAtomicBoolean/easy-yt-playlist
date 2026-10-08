@@ -1,7 +1,8 @@
 # easy-yt-playlist
 A small firefox extension to easily add a video to multiple youtube playlists. 
 
-> [!NOTE] Disclaimer
+> [!NOTE]
+> Disclaimer !
 > This extension has mainly been vibecoded quickly and is made for personal use.  
 > You are free to use it, but I won't add more features as I want to keep it simple.
 > However, I'll try to keep it up to date with the latest youtube changes. 
