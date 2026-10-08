@@ -6,8 +6,8 @@ const listEl = document.getElementById("playlists");
 const messageEl = document.getElementById("message");
 const footerEl = document.getElementById("footer");
 const doneEl = document.getElementById("done");
+const footerStatusEl = document.getElementById("footer-status");
 const playlistTemplate = document.getElementById("playlist-template");
-
 const ERROR_MESSAGES = {
 	NOT_LOGGED_IN: "Sign in to YouTube to see your playlists.",
 };
@@ -27,13 +27,14 @@ const VISIBILITIES = {
 	},
 };
 
-/** @type {{ tabId: number | null, videoId: string | null, initial: Map<string, boolean>, rows: Array<{ el: HTMLElement, searchText: string }> }} */
+/** @type {{ tabId: number | null, videoId: string | null, initial: Map<string, boolean>, rows: Array<{ id: string, el: HTMLElement, searchText: string }>, saving: boolean }} */
 const state = {
 	tabId: null,
 	videoId: null,
-	// Playlist ID -> whether it contained the video when the popup opened.
+	// Playlist ID -> whether it contains the video on YouTube (at opening, then after each save).
 	initial: new Map(),
 	rows: [],
+	saving: false,
 };
 
 async function getActiveTab() {
@@ -93,6 +94,7 @@ function renderPlaylist(playlist) {
 function renderPlaylists(playlists) {
 	state.initial = new Map(playlists.map((p) => [p.id, p.containsVideo]));
 	state.rows = playlists.map((playlist) => ({
+		id: playlist.id,
 		el: renderPlaylist(playlist),
 		searchText: normalize(playlist.title),
 	}));
@@ -114,8 +116,78 @@ function getChanges() {
 function updateDoneButton() {
 	const { add, remove } = getChanges();
 	const count = add.length + remove.length;
-	doneEl.disabled = count === 0;
+	doneEl.disabled = state.saving || count === 0;
 	doneEl.textContent = count ? `Done (${count})` : "Done";
+}
+
+/**
+ * @param {string} playlistId
+ * @param {"pending" | "ok" | "error" | null} kind null clears the status
+ * @param {string} [tooltip]
+ */
+function setRowStatus(playlistId, kind, tooltip = "") {
+	const statusEl = state.rows.find((row) => row.id === playlistId)?.el.querySelector(".status");
+	if (!statusEl) return;
+	statusEl.className = kind ? `status ${kind}` : "status";
+	statusEl.textContent = { pending: "…", ok: "✓", error: "✗" }[kind] ?? "";
+	statusEl.title = tooltip;
+}
+
+function setSaving(saving) {
+	state.saving = saving;
+	searchEl.disabled = saving;
+	listEl.classList.toggle("busy", saving);
+	for (const checkbox of listEl.querySelectorAll("input[type=checkbox]")) checkbox.disabled = saving;
+	updateDoneButton();
+	if (saving) doneEl.textContent = "Saving…";
+}
+
+async function save() {
+	const { add, remove } = getChanges();
+	const changed = [...add, ...remove];
+	if (!changed.length || state.saving) return;
+
+	// Show every row so that no status is hidden by the search filter.
+	searchEl.value = "";
+	applySearch();
+
+	for (const playlistId of changed) setRowStatus(playlistId, "pending", "Saving…");
+	footerStatusEl.textContent = "";
+	setSaving(true);
+
+	let results;
+	try {
+		({ results } = await callBackground("applyChanges", {
+			tabId: state.tabId,
+			videoId: state.videoId,
+			add,
+			remove,
+		}));
+	} catch (error) {
+		const message = ERROR_MESSAGES[error.code] ?? error.message;
+		for (const playlistId of changed) setRowStatus(playlistId, "error", message);
+		footerStatusEl.textContent = `Could not save: ${message}`;
+		setSaving(false);
+		return;
+	}
+
+	for (const result of results) {
+		if (result.ok) {
+			// The playlist now matches its checkbox: it no longer counts as a change.
+			state.initial.set(result.playlistId, result.action === "add");
+			setRowStatus(result.playlistId, "ok", result.action === "add" ? "Added" : "Removed");
+		} else {
+			setRowStatus(result.playlistId, "error", result.error?.message ?? "Failed");
+		}
+	}
+	setSaving(false);
+
+	const failed = results.filter((result) => !result.ok).length;
+	if (failed === 0) {
+		footerStatusEl.textContent = "Saved.";
+	} else {
+		footerStatusEl.textContent = `${failed} of ${results.length} failed. Hover ✗ for details.`;
+	}
 }
 
 function applySearch() {
@@ -166,12 +238,12 @@ async function init() {
 	searchEl.focus();
 }
 
-listEl.addEventListener("change", updateDoneButton);
-searchEl.addEventListener("input", applySearch);
-
-doneEl.addEventListener("click", () => {
-	// Step 6: send getChanges() to the background ("applyChanges") and report the results.
-	console.log("Changes to apply", getChanges());
+listEl.addEventListener("change", (event) => {
+	// A result mark is stale once the user touches that playlist again.
+	setRowStatus(event.target.value, null);
+	updateDoneButton();
 });
+searchEl.addEventListener("input", applySearch);
+doneEl.addEventListener("click", save);
 
 init().catch((error) => showMessage(`Error: ${error.message}`));

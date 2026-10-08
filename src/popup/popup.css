@@ -6,6 +6,7 @@
 	--hover: #0000000d;
 	--border: #0000001a;
 	--placeholder: #e5e5e5;
+	--success: #107c10;
 	color-scheme: light dark;
 }
 
@@ -17,6 +18,7 @@
 		--hover: #ffffff1a;
 		--border: #ffffff26;
 		--placeholder: #3f3f3f;
+		--success: #6ccb5f;
 	}
 }
 
@@ -149,6 +151,33 @@ header {
 	fill: currentColor;
 }
 
+.status {
+	flex: none;
+	margin-left: auto;
+	font-weight: 600;
+}
+
+.status:empty {
+	display: none;
+}
+
+.status.ok {
+	color: var(--success);
+}
+
+.status.error {
+	color: var(--accent);
+	cursor: help;
+}
+
+.status.pending {
+	color: var(--muted);
+}
+
+.playlists.busy .playlist {
+	cursor: default;
+}
+
 .message {
 	margin: 0;
 	padding: 16px;
@@ -159,12 +188,19 @@ header {
 
 footer {
 	display: flex;
-	justify-content: flex-end;
+	align-items: center;
+	gap: 12px;
 	padding: 8px 16px 12px;
 	border-top: 1px solid var(--border);
 }
 
+.footer-status {
+	flex: 1;
+	font-size: 12px;
+}
+
 #done {
+	flex: none;
 	padding: 6px 16px;
 	font: inherit;
 	font-weight: 600;
