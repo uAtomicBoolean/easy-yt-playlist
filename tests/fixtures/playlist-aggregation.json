@@ -1,0 +1,188 @@
+{
+	"contents": {
+		"twoColumnBrowseResultsRenderer": {
+			"tabs": [
+				{
+					"tabRenderer": {
+						"content": {
+							"richGridRenderer": {
+								"contents": [
+									{
+										"richItemRenderer": {
+											"content": {
+												"lockupViewModel": {
+													"contentId": "WL",
+													"contentType": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+													"contentImage": {
+														"collectionThumbnailViewModel": {
+															"primaryThumbnail": {
+																"thumbnailViewModel": {
+																	"image": {
+																		"sources": [
+																			{
+																				"url": "https://i.ytimg.com/vi/fixture0/hqdefault.jpg",
+																				"width": 480,
+																				"height": 270
+																			}
+																		]
+																	}
+																}
+															}
+														}
+													},
+													"metadata": {
+														"lockupMetadataViewModel": {
+															"title": {
+																"content": "Watch later"
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									{
+										"richItemRenderer": {
+											"content": {
+												"lockupViewModel": {
+													"contentId": "PLfixture1xxxxxxxxxxxxxxxxxxxxxx",
+													"contentType": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+													"contentImage": {
+														"collectionThumbnailViewModel": {
+															"primaryThumbnail": {
+																"thumbnailViewModel": {
+																	"image": {
+																		"sources": [
+																			{
+																				"url": "https://i.ytimg.com/vi/fixture1/hqdefault.jpg",
+																				"width": 480,
+																				"height": 270
+																			}
+																		]
+																	}
+																}
+															}
+														}
+													},
+													"metadata": {
+														"lockupMetadataViewModel": {
+															"title": {
+																"content": "Playlist 1"
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									{
+										"richItemRenderer": {
+											"content": {
+												"lockupViewModel": {
+													"contentId": "PLfixture2xxxxxxxxxxxxxxxxxxxxxx",
+													"contentType": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+													"contentImage": {
+														"collectionThumbnailViewModel": {
+															"primaryThumbnail": {
+																"thumbnailViewModel": {
+																	"image": {
+																		"sources": [
+																			{
+																				"url": "https://i.ytimg.com/vi/fixture2/hqdefault.jpg",
+																				"width": 480,
+																				"height": 270
+																			}
+																		]
+																	}
+																}
+															}
+														}
+													},
+													"metadata": {
+														"lockupMetadataViewModel": {
+															"title": {
+																"content": "Playlist 2"
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									{
+										"richItemRenderer": {
+											"content": {
+												"lockupViewModel": {
+													"contentId": "PLfixture3xxxxxxxxxxxxxxxxxxxxxx",
+													"contentType": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+													"contentImage": {
+														"collectionThumbnailViewModel": {
+															"primaryThumbnail": {
+																"thumbnailViewModel": {
+																	"image": {
+																		"sources": [
+																			{
+																				"url": "https://i.ytimg.com/vi/fixture3/hqdefault.jpg",
+																				"width": 480,
+																				"height": 270
+																			}
+																		]
+																	}
+																}
+															}
+														}
+													},
+													"metadata": {
+														"lockupMetadataViewModel": {
+															"title": {
+																"content": "Playlist 3"
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									{
+										"richItemRenderer": {
+											"content": {
+												"lockupViewModel": {
+													"contentId": "PLforeignxxxxxxxxxxxxxxxxxxxxxxxxx",
+													"contentType": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+													"contentImage": {
+														"collectionThumbnailViewModel": {
+															"primaryThumbnail": {
+																"thumbnailViewModel": {
+																	"image": {
+																		"sources": [
+																			{
+																				"url": "https://i.ytimg.com/vi/fixture4/hqdefault.jpg",
+																				"width": 480,
+																				"height": 270
+																			}
+																		]
+																	}
+																}
+															}
+														}
+													},
+													"metadata": {
+														"lockupMetadataViewModel": {
+															"title": {
+																"content": "Someone else's playlist"
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								]
+							}
+						}
+					}
+				}
+			]
+		}
+	}
+}

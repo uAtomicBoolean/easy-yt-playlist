@@ -1,0 +1,218 @@
+{
+	"contents": [
+		{
+			"addToPlaylistRenderer": {
+				"playlists": [
+					{
+						"playlistAddToOptionRenderer": {
+							"playlistId": "WL",
+							"title": {
+								"accessibility": {
+									"accessibilityData": {
+										"label": "Watch later Private"
+									}
+								},
+								"simpleText": "Watch later"
+							},
+							"privacy": "PRIVATE",
+							"containsSelectedVideos": "NONE",
+							"privacyIcon": {
+								"iconType": "PRIVACY_PRIVATE"
+							},
+							"addToPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "WL",
+									"actions": [
+										{
+											"addedVideoId": "dQw4w9WgXcQ",
+											"action": "ACTION_ADD_VIDEO"
+										}
+									]
+								}
+							},
+							"removeFromPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "WL",
+									"actions": [
+										{
+											"action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+											"removedVideoId": "dQw4w9WgXcQ"
+										}
+									]
+								}
+							}
+						}
+					},
+					{
+						"playlistAddToOptionRenderer": {
+							"playlistId": "PLfixture1xxxxxxxxxxxxxxxxxxxxxx",
+							"title": {
+								"accessibility": {
+									"accessibilityData": {
+										"label": "Playlist 1 Public"
+									}
+								},
+								"simpleText": "Playlist 1"
+							},
+							"privacy": "PUBLIC",
+							"containsSelectedVideos": "NONE",
+							"privacyIcon": {
+								"iconType": "PRIVACY_PUBLIC"
+							},
+							"addToPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture1xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"addedVideoId": "dQw4w9WgXcQ",
+											"action": "ACTION_ADD_VIDEO"
+										}
+									]
+								}
+							},
+							"removeFromPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture1xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+											"removedVideoId": "dQw4w9WgXcQ"
+										}
+									]
+								}
+							}
+						}
+					},
+					{
+						"playlistAddToOptionRenderer": {
+							"playlistId": "PLfixture2xxxxxxxxxxxxxxxxxxxxxx",
+							"title": {
+								"accessibility": {
+									"accessibilityData": {
+										"label": "Playlist 2 Private"
+									}
+								},
+								"simpleText": "Playlist 2"
+							},
+							"privacy": "PRIVATE",
+							"containsSelectedVideos": "ALL",
+							"privacyIcon": {
+								"iconType": "PRIVACY_PRIVATE"
+							},
+							"addToPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture2xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"addedVideoId": "dQw4w9WgXcQ",
+											"action": "ACTION_ADD_VIDEO"
+										}
+									]
+								}
+							},
+							"removeFromPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture2xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+											"removedVideoId": "dQw4w9WgXcQ"
+										}
+									]
+								}
+							}
+						}
+					},
+					{
+						"playlistAddToOptionRenderer": {
+							"playlistId": "PLfixture3xxxxxxxxxxxxxxxxxxxxxx",
+							"title": {
+								"accessibility": {
+									"accessibilityData": {
+										"label": "Playlist 3 Unlisted"
+									}
+								},
+								"simpleText": "Playlist 3"
+							},
+							"privacy": "UNLISTED",
+							"containsSelectedVideos": "NONE",
+							"privacyIcon": {
+								"iconType": "PRIVACY_UNLISTED"
+							},
+							"addToPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture3xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"addedVideoId": "dQw4w9WgXcQ",
+											"action": "ACTION_ADD_VIDEO"
+										}
+									]
+								}
+							},
+							"removeFromPlaylistServiceEndpoint": {
+								"commandMetadata": {
+									"webCommandMetadata": {
+										"sendPost": true,
+										"apiUrl": "/youtubei/v1/browse/edit_playlist"
+									}
+								},
+								"playlistEditEndpoint": {
+									"playlistId": "PLfixture3xxxxxxxxxxxxxxxxxxxxxx",
+									"actions": [
+										{
+											"action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+											"removedVideoId": "dQw4w9WgXcQ"
+										}
+									]
+								}
+							}
+						}
+					}
+				]
+			}
+		}
+	]
+}
