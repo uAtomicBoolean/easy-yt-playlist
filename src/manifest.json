@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Easy YT Playlist",
+  "version": "1.0.0",
+  "description": "Easily add a video to multiple youtube playlists",
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "action": {
+    "default_title": "Add to playlists",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "background": {
+    "scripts": ["background/background.js"]
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["*://*.youtube.com/*"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "easy-yt-playlist@uatomicboolean",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}
