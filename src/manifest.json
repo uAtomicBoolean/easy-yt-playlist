@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Easy YT Playlist",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Easily add a video to multiple youtube playlists",
   "icons": {
     "48": "icons/icon.svg",
