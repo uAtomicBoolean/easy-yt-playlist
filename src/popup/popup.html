@@ -7,15 +7,33 @@
 	</head>
 	<body>
 		<header>
-			<h1>Easy YT Playlist</h1>
+			<p class="muted">Save to playlists</p>
+			<p id="video-title" class="video-title" hidden></p>
+			<input id="search" type="search" placeholder="Search playlists" aria-label="Search playlists" autocomplete="off" hidden />
 		</header>
+
 		<main>
-			<section id="video" hidden>
-				<p class="muted">Add to playlists:</p>
-				<p id="video-title" class="video-title"></p>
-			</section>
-			<p id="no-video" class="muted" hidden>Open a YouTube video to add it to your playlists.</p>
+			<ul id="playlists" class="playlists" hidden></ul>
+			<p id="message" class="message muted">Loading playlists…</p>
 		</main>
+
+		<footer id="footer" hidden>
+			<button id="done" type="button" disabled>Done</button>
+		</footer>
+
+		<template id="playlist-template">
+			<li>
+				<label class="playlist">
+					<input type="checkbox" />
+					<span class="thumbnail"><img alt="" loading="lazy" decoding="async" /></span>
+					<span class="info">
+						<span class="title"></span>
+						<span class="visibility"><svg viewBox="0 0 24 24" aria-hidden="true"><path /></svg><span class="visibility-label"></span></span>
+					</span>
+				</label>
+			</li>
+		</template>
+
 		<script type="module" src="popup.js"></script>
 	</body>
 </html>
