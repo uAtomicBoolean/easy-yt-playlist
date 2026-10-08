@@ -98,6 +98,7 @@ function renderPlaylists(playlists) {
 		el: renderPlaylist(playlist),
 		searchText: normalize(playlist.title),
 	}));
+	state.rows.sort((a, b) => a.searchText.localeCompare(b.searchText));
 	listEl.replaceChildren(...state.rows.map((row) => row.el));
 }
 
