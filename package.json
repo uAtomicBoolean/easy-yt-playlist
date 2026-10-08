@@ -1,0 +1,25 @@
+{
+  "name": "easy-yt-playlist",
+  "version": "1.0.0",
+  "description": "A small firefox extension to easily add a video to multiple youtube playlists.",
+  "keywords": [
+    "extension",
+    "firefox",
+    "youtube"
+  ],
+  "homepage": "https://github.com/uAtomicBoolean/easy-yt-playlist#readme",
+  "bugs": {
+    "url": "https://github.com/uAtomicBoolean/easy-yt-playlist/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uAtomicBoolean/easy-yt-playlist.git"
+  },
+  "license": "MIT",
+  "author": "uAtomicBoolean",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
