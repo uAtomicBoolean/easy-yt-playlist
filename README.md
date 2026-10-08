@@ -20,3 +20,8 @@ npm run build  # packages the extension into dist/
 
 The popup and the code injected into YouTube are not covered by `npm test`:
 see [docs/manual-testing.md](docs/manual-testing.md).
+
+## Installation
+
+Download the `.xpi` file of the [latest release](https://github.com/uAtomicBoolean/easy-yt-playlist/releases/latest)
+and open it with Firefox. The extension then updates itself when a new release is published.

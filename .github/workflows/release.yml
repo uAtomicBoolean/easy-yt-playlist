@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: [src/manifest.json]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      released: ${{ steps.version.outputs.released }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Read the manifest version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(jq -r .version src/manifest.json)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if gh release view "v$version" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "Release v$version already exists, nothing to do."
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version $version has no release yet."
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  release:
+    name: Sign and release
+    needs: check
+    if: needs.check.outputs.released == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+      EXTENSION_ID: easy-yt-playlist@uatomicboolean
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      - run: npm run lint
+
+      - name: Sign the extension (unlisted)
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
+        run: npx web-ext sign --source-dir src --artifacts-dir dist --channel unlisted
+
+      - name: Prepare the release files
+        run: |
+          shopt -s nullglob
+          signed=(dist/*.xpi)
+          if [ "${#signed[@]}" -ne 1 ]; then
+            echo "Expected exactly one signed .xpi in dist/, found ${#signed[@]}." >&2
+            exit 1
+          fi
+
+          xpi="easy-yt-playlist-$VERSION.xpi"
+          mv "${signed[0]}" "dist/$xpi"
+          hash=$(sha256sum "dist/$xpi" | cut -d ' ' -f 1)
+
+          jq -n \
+            --arg id "$EXTENSION_ID" \
+            --arg version "$VERSION" \
+            --arg link "https://github.com/$GITHUB_REPOSITORY/releases/download/v$VERSION/$xpi" \
+            --arg hash "sha256:$hash" \
+            '{ addons: { ($id): { updates: [{ version: $version, update_link: $link, update_hash: $hash }] } } }' \
+            > dist/updates.json
+          cat dist/updates.json
+
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v$VERSION" \
+            "dist/easy-yt-playlist-$VERSION.xpi" \
+            dist/updates.json \
+            --title "v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --generate-notes \
+            --latest
